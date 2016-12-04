@@ -1,6 +1,8 @@
 ;;;; -*- Mode: Lisp; Syntax: Common-Lisp -*-
 (defpackage :geohash
-  (:use :cl))
+  (:use :cl)
+  (:export :*global-symbol*
+           :exported-function))
 
 (in-package :geohash)
 
@@ -8,15 +10,6 @@
 
 (defun base32_pos (l)
   (string (aref *base32_vars* l)))
-
-(defun toggling (length)
-  (let ((even/odd 0))
-    (loop repeat length do
-         (if (eql even/odd 0)
-             (setf result 0)
-             (setf result 1))
-         (format t " ~d~%" result)
-         (setf even/odd (- 1 even/odd)))))
 
 (defun enc (lat lon &optional (precision 12))
   (let ((even 0)
@@ -43,7 +36,7 @@
                             (setf bound_lat (cons (car bound_lat) mid))))))
              (push (base32_pos code) result)
              (setf even (+ 1 even))))
-     (format t "~{~a~^ ~}" (nreverse result))))
+     (format t "~{~a~^~}" (nreverse result))))
 
 (defun find_geocoordenates (lat lon)
   (let ((even 0)
