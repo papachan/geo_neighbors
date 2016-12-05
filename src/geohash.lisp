@@ -33,10 +33,10 @@
                         (if (> lat mid)
                             (setf bound_lat (cons mid (cdr bound_lat))
                                   code (+ code bit))
-                            (setf bound_lat (cons (car bound_lat) mid))))))
-             (push (base32_pos code) result)
-             (setf even (+ 1 even))))
-     (format t "~{~a~^~}" (nreverse result))))
+                            (setf bound_lat (cons (car bound_lat) mid)))))
+                  (setf even (+ 1 even)))
+             (push (base32_pos code) result)))
+    (apply #'concatenate 'string (nreverse result))))
 
 (defun find_geocoordenates (lat lon)
   (let ((even 0)
