@@ -12,11 +12,15 @@
 
 (in-suite geohash)
 
-(test geocodehash-test
-  "test Encode Geohash from latitude longitude"
+(test encoding-test
+  "test to Encode a given latitude longitude into geohash"
   (is (equal (encode 35.7101389 139.8108333 8) "xn77jkz4"))
   (is (equal (encode 4.616335 -74.071275 6) "d2g662"))
   (is (equal (encode 35.7101389 139.8108333 3) "xn7")))
+
+(test decoding-test
+  "test to Decode a Geohash into a latitude longitude"
+      )
 
 (defun run-tests ()
   (5am:run! 'geohash))
