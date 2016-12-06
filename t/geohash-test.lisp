@@ -3,6 +3,7 @@
 
 (defpackage gehoash-test
   (:use :cl :fiveam :geohash)
+  (:import-from :geohash)
   (:export :run-tests))
 
 (in-package #:geohash-test)
@@ -13,9 +14,9 @@
 
 (test geocodehash-test
   "test Encode Geohash from latitude longitude"
-  (is (equal (geohash::enc 35.7101389 139.8108333 8) "xn77jkz4"))
-  (is (equal (geohash::enc 4.616335 -74.071275 6) "d2g662"))
-  (is (equal (geohash::enc 35.7101389 139.8108333 3) "xn7")))
+  (is (equal (encode 35.7101389 139.8108333 8) "xn77jkz4"))
+  (is (equal (encode 4.616335 -74.071275 6) "d2g662"))
+  (is (equal (encode 35.7101389 139.8108333 3) "xn7")))
 
 (defun run-tests ()
   (5am:run! 'geohash))

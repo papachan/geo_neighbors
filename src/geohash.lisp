@@ -1,8 +1,7 @@
 ;;;; -*- Mode: Lisp; Syntax: Common-Lisp -*-
 (defpackage :geohash
   (:use :cl)
-  (:export :*global-symbol*
-           :exported-function))
+  (:export :encode))
 
 (in-package :geohash)
 
@@ -11,7 +10,7 @@
 (defun base32_pos (l)
   (string (aref *base32_vars* l)))
 
-(defun enc (lat lon &optional (precision 12))
+(defun encode (lat lon &optional (precision 12))
   (let ((even 0)
         (result nil)
         (bound_lon (cons -180 180))
