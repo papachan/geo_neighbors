@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+<style type="text/css">
+#gmap_canvas img {
+  max-width:none!important;background:none!important
+}
+</style>
+</head>
+
+<body>
+  <div style="overflow:hidden;height:680px;width:100%;">
+    <div id="map" style="height:100%;width:100%;"></div>
+  </div>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+<script type="text/javascript">
+    var map;
+
+    function get_geohash(lat,lon) {
+      var http = new XMLHttpRequest();
+      http.onreadystatechange = function() {
+          if (http.readyState == XMLHttpRequest.DONE ) {
+             if(http.status == 200){
+                 console.log(http.responseText);
+                 resp = JSON.parse(http.responseText);
+                 console.log(resp.data);
+             }
+             else {
+                 console.log('something else other than 200 was returned')
+             }
+          }
+      };
+      http.open("POST", "/geohash", true);
+      http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      http.send("lat=HOLA&lon=2");
+    }
+
+    
+    function init_map() {
+
+    map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 11,
+      center: {lat: 4.649900, lng: -74.090800},
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+    
+    var bounds = new google.maps.LatLngBounds(
+        new google.maps.LatLng(4.231819, -74.290800),
+        new google.maps.LatLng(4.940900, -74.010800));
+
+    google.maps.event.addListener(map, 'click', function(event) {
+        get_geohash(event.latLng.lat(), event.latLng.lng());
+    });
+
+  }
+  google.maps.event.addDomListener(window, 'load', init_map);
+</script>
+</body>
+</html>
