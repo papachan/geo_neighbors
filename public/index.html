@@ -3,9 +3,9 @@
 <head>
     <title></title>
 <style type="text/css">
-#gmap_canvas img {
-  max-width:none!important;background:none!important
-}
+  #gmap_canvas img {
+    max-width:none!important;background:none!important
+  }
 </style>
 </head>
 
@@ -24,7 +24,7 @@
              if(http.status == 200){
                  console.log(http.responseText);
                  resp = JSON.parse(http.responseText);
-                 console.log(resp.data);
+                 console.log(resp);
              }
              else {
                  console.log('something else other than 200 was returned')
@@ -33,7 +33,7 @@
       };
       http.open("POST", "/geohash", true);
       http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      http.send("lat=HOLA&lon=2");
+      http.send(JSON.stringify({lat: lat, lon: lon}));
     }
 
     
