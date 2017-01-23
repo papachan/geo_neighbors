@@ -22,9 +22,8 @@
       http.onreadystatechange = function() {
           if (http.readyState == XMLHttpRequest.DONE ) {
              if(http.status == 200){
-                 console.log(http.responseText);
                  resp = JSON.parse(http.responseText);
-                 console.log(resp);
+                 console.log(resp.data);
              }
              else {
                  console.log('something else other than 200 was returned')

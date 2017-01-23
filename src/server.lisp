@@ -1,10 +1,15 @@
 ;;;; -*- Mode: Lisp; Syntax: Common-Lisp -*-
 
 (defpackage :server
-  (:use :cl :hunchentoot :cl-who :parenscript :smackjack :geohash)
+  (:use :cl :hunchentoot :cl-who :geohash :cl-json)
+  (:import-from :geohash
+                :encode)
   (:import-from :hunchentoot
                 :define-easy-handler
                 :easy-acceptor)
+  (:import-from :cl-json
+                :json-bind
+                :decode-json-from-string)
   (:export :start-server
            :stop-server))
 (in-package :server)
@@ -30,8 +35,9 @@
 
 (define-easy-handler (hosts-handler :uri "/geohash") ()
   (setf (hunchentoot:content-type*) "application/json")
-  (let ((request-type (hunchentoot:request-method hunchentoot:*request*)))
-    (hunchentoot:raw-post-data :force-text t)))
+  (let* ((raw-data (hunchentoot:raw-post-data :force-text t)))
+    (json-bind (lat lon) raw-data
+      (format nil "{\"data\":\"~a\"}" (encode lat lon 6)))))
 
 (defun stop-server ()
   (when *web-server*
@@ -43,6 +49,6 @@
                                             :port port
                                             :document-root "public/"))
   (hunchentoot:start *web-server*)
-  (format t "~&;; Starting web server on localhost:~A." port))
+  (format t "~& ;; Starting web server on localhost:~A." port))
 
 

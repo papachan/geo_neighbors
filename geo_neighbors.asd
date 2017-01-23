@@ -5,7 +5,8 @@
   :depends-on (:cl-who
                :hunchentoot
                :parenscript
-               :smackjack)
+               :smackjack
+               :cl-json)
   :components ((:module "src"
                 :serial t
                 :components
