@@ -36,8 +36,9 @@
 (define-easy-handler (hosts-handler :uri "/geohash") ()
   (setf (hunchentoot:content-type*) "application/json")
   (let* ((raw-data (hunchentoot:raw-post-data :force-text t)))
-    (json-bind (lat lon) raw-data
-      (format nil "{\"data\":\"~a\"}" (encode lat lon 6)))))
+    (json-bind (lat lon zoom) raw-data
+      (format nil "{\"data\":\"~a\"}"
+              (encode lat lon (utils::convert_scale zoom))))))
 
 (defun stop-server ()
   (when *web-server*

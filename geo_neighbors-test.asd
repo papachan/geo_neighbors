@@ -3,6 +3,7 @@
   :license "MIT"
   :description ""
   :depends-on (:geo_neighbors
+               :drakma
                :fiveam)
   :components ((:module "t"
                 :serial t

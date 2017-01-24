@@ -11,4 +11,5 @@
                 :serial t
                 :components
                 ((:file "geohash")
-                 (:file "server")))))
+                 (:file "server")
+                 (:file "utils")))))
