@@ -5,8 +5,8 @@
 
 (in-package :utils)
 
-(defun convert_scale (val &key (minor 3) (maximum 18))
+(defun convert_scale (val &key (minor 3) (maximum 21))
   (let* ((m (min maximum val))
-         (res (* (round (float (/ (- m minor) (- maximum minor)))) 6)))
+        (res (- m 10)))
     (max minor res)))
 
