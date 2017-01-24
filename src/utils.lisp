@@ -5,7 +5,8 @@
 
 (in-package :utils)
 
-(defun convert_scale (n)
-  (* (round (float(/ n 12))) 12))
-
+(defun convert_scale (val &key (minor 3) (maximum 18))
+  (let* ((m (min maximum val))
+         (res (* (round (float (/ (- m minor) (- maximum minor)))) 6)))
+    (max minor res)))
 
