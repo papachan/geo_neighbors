@@ -9,4 +9,5 @@
                 :serial t
                 :components
                 ((:file "package-test")
-                 (:file "geohash-test")))))
+                 (:file "geohash-test")
+                 (:file "web-test")))))
