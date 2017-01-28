@@ -4,6 +4,7 @@
   :description ""
   :depends-on (:geo_neighbors
                :drakma
+               :cl-json
                :fiveam)
   :components ((:module "t"
                 :serial t

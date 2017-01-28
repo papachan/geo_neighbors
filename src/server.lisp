@@ -2,6 +2,8 @@
 
 (defpackage :server
   (:use :cl :hunchentoot :cl-who :geohash :cl-json)
+  (:import-from :utils
+                :convert_scale)
   (:import-from :geohash
                 :encode)
   (:import-from :hunchentoot
@@ -38,7 +40,7 @@
   (let* ((raw-data (hunchentoot:raw-post-data :force-text t)))
     (json-bind (lat lon zoom) raw-data
       (format nil "{\"data\":\"~a\"}"
-              (encode lat lon (utils::convert_scale zoom))))))
+              (encode lat lon (convert_scale zoom))))))
 
 (defun stop-server ()
   (when *web-server*
